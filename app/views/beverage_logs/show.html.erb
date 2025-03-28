@@ -1,0 +1,92 @@
+<div class="mx-auto bg-white p-8 rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+    🥤 Beverage Log Details
+  </h2>
+
+  <div class="grid grid-cols-2 gap-6 text-gray-700">
+    <!-- Date & Time -->
+    <div>
+      <p class="font-semibold">📅 Date:</p>
+      <p class="text-gray-600"><%= @beverage_log.date.strftime("%B %d, %Y") %></p>
+    </div>
+    <div>
+      <p class="font-semibold">⏰ Time:</p>
+      <p class="text-gray-600"><%= @beverage_log.time.strftime("%I:%M %p") %></p>
+    </div>
+
+    <!-- Beverage Category & Subcategory -->
+    <div>
+      <p class="font-semibold">🍹 Beverage:</p>
+      <p class="text-gray-600"><%= @beverage_log.category.name %> - <%= @beverage_log.subcategory&.name || @beverage_log.other_category %> </p>
+    </div>
+
+    <!-- Quantity & Unit -->
+    <div>
+      <p class="font-semibold">📏 Quantity:</p>
+      <p class="text-gray-600"><%= @beverage_log.quantity %> <%= @beverage_log.unit %></p>
+    </div>
+
+    <!-- Temperature -->
+    <div>
+      <p class="font-semibold">🌡 Temperature:</p>
+      <p class="text-gray-600"><%= @beverage_log.temperature %>°C</p>
+    </div>
+
+    <!-- Additions -->
+    <div>
+      <p class="font-semibold">➕ Additions:</p>
+      <p class="text-gray-600"><%= @beverage_log.additions.present? ? @beverage_log.additions.join(", ") : "None" %></p>
+    </div>
+
+    <!-- Notes -->
+    <div class="col-span-2">
+      <p class="font-semibold">📝 Notes:</p>
+      <p class="text-gray-600"><%= @beverage_log.notes.presence || "No additional notes" %></p>
+    </div>
+
+
+    <!-- Symptoms -->
+    <div>
+      <p class="font-semibold">🤒 Symptoms Occurred?</p>
+      <p class="text-gray-600"><%= @beverage_log.symptom_occurred ? "Yes" : "No" %></p>
+    </div>
+
+    <% if @beverage_log.symptom_occurred %>
+      <div>
+        <p class="font-semibold">🚑 Symptoms:</p>
+        <p class="text-gray-600"><%= @beverage_log.symptoms.join(", ") %></p>
+      </div>
+
+      <div>
+        <p class="font-semibold">⚠️ Severity:</p>
+        <p class="text-gray-600"><%= @beverage_log.symptom_severity %></p>
+      </div>
+
+      <div>
+        <p class="font-semibold">⏳ Timing:</p>
+        <p class="text-gray-600"><%= @beverage_log.symptom_timing %></p>
+      </div>
+    <% end %>
+    <!-- Estimated Calories -->
+    <div class="col-span-2 bg-red-100 text-red-800 p-4 rounded-md font-semibold">
+      🔥 Estimated Calories: <%= estimate_calories(@beverage_log) %> kcal
+    </div>
+
+  </div>
+  <div class="mt-6 p-4 bg-blue-100 border-l-4 border-blue-500">
+    <h3 class="text-lg font-bold text-blue-700">Personalized Tips</h3>
+    <ul class="list-disc pl-5 text-gray-700">
+      <% personalized_tips(@beverage_log).each do |tip| %>
+        <li><%= tip %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <!-- Actions -->
+  <div class="mt-6 flex justify-between">
+    <%= link_to "← Back to Logs", beverage_logs_path, class: "text-blue-500 hover:underline" %>
+    <%= link_to "✏️ Edit Log", edit_beverage_log_path(@beverage_log), class: "text-yellow-500 hover:underline" %>
+  </div>
+
+
+</div>

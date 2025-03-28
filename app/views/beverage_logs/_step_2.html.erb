@@ -1,0 +1,58 @@
+<div id="step_2" class="hidden" data-controller="update-symptoms-form">
+  <h3 class="text-xl font-bold text-gray-800">Symptoms Tracking</h3>
+
+  <p class="text-gray-500 text-sm">Did you experience any GI symptoms?</p>
+  <div class="space-y-6">
+  <!-- Symptom Occurrence -->
+    <div>
+      <div class="mt-2 flex space-x-4">
+        <label class="flex items-center">
+          <% gi_symptoms_checked = f.object.symptom_occurred %>
+          <%= f.radio_button :symptom_occurred, true, class: "hidden peer",  checked: gi_symptoms_checked %>
+          <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-[#ff5a5f] peer-checked:text-white cursor-pointer">Yes</span>
+        </label>
+        <label class="flex items-center">
+          <%= f.radio_button :symptom_occurred, false, class: "hidden peer",  checked: !gi_symptoms_checked %>
+          <span class="px-4 py-2 border border-gray-300 rounded-lg peer-checked:bg-[#ff5a5f] peer-checked:text-white cursor-pointer">No</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Symptom Details (Only if Yes) -->
+    <div id="symptom_details" class="<%= gi_symptoms_checked ? '' : 'hidden'%>">
+      <label class="block text-sm font-semibold text-gray-600">Select Symptoms</label>
+      <div class="grid grid-cols-2 gap-2 mt-2">
+        <% gi_symptoms.each do |symptom| %>
+          <label class="flex items-center space-x-2">
+            <%= f.check_box :symptoms, { class: "h-4 w-4 text-[#ff5a5f] rounded focus:ring-[#ff5a5f]", name: "beverage_log[symptoms][]", value: symptom, unchecked_value: "" }, symptom, nil %>
+            <span class="text-gray-700 text-sm"><%= symptom %></span>
+          </label>
+        <% end %>
+      </div>
+
+      <!-- Other Symptoms -->
+      <div class="mt-4">
+        <label class="block text-sm font-semibold text-gray-600">Other Symptoms (if any)</label>
+        <%= f.text_field :other_symptom, class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff5a5f] focus:border-[#ff5a5f] transition", placeholder: "Enter additional symptoms" %>
+      </div>
+
+      <!-- Symptom Severity -->
+      <div class="mt-4">
+        <label class="block text-sm font-semibold text-gray-600">Symptom Severity</label>
+        <%= f.select :symptom_severity, symptom_severity_selections, { prompt: "Select severity" }, class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff5a5f] focus:border-[#ff5a5f] transition", id:"symptom-severity" %>
+      </div>
+
+      <!-- Symptom Timing -->
+      <div class="mt-4">
+        <label class="block text-sm font-semibold text-gray-600">When did symptoms appear?</label>
+        <%= f.select :symptom_timing, symptom_timing_selections, { prompt: "Select timing" }, class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ff5a5f] focus:border-[#ff5a5f] transition", id:'symptom-timing' %>
+      </div>
+    </div>
+    <div class="flex justify-between mt-4" data-controller='update-beverage-form'>
+      <%= link_to "← Back", '#' , class: "bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition", data: { action: "click->update-beverage-form#changeForm" } %>
+      <%= f.submit "Submit", class: "bg-[#ff5a5f] text-white px-6 py-2 rounded-lg hover:bg-red-500 transition", data: { action: "click->update-beverage-form#openConfirmationModal" } %>
+    </div>
+  </div>
+</div>
+
+<%= render 'components/confirmation_modal', f: f%>

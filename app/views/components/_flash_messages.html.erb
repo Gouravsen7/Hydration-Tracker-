@@ -1,0 +1,13 @@
+<div class="absolute transform w-full">
+  <div class="mt-2 rounded-lg shadow-lg w-full max-w-md mx-auto">
+    <% if flash[:notice] || flash[:alert] || flash[:error] %>
+      <div class="mb-4 p-3 rounded-lg text-white font-semibold
+        <% if flash[:notice] %> bg-green-500 <% elsif flash[:alert] %> bg-yellow-500 <% elsif flash[:error] %> bg-red-500 <% end %>">
+        <%= flash[:notice] || flash[:alert] || flash[:error] %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+

@@ -56,7 +56,7 @@ Ensure you have the following installed:
 
 5. **Run the Rails Server**
    ```sh
-   rails server
+   rails assets:precompile && rails server
    ```
 
 6. **Access the App**
@@ -73,4 +73,4 @@ Pull requests are welcome. For major changes, please open an issue first.
 ## License
 MIT License.
 
-# Hydration-Tracker-
+# Hydration-Tracker

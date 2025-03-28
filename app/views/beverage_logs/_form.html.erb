@@ -1,0 +1,17 @@
+<div class="flex">
+  <div class="flex-1 p-6 bg-gray-100 min-h-screen flex flex-col">
+    <div class="bg-white shadow-lg rounded-xl p-8 flex-1 overflow-y-auto max-h-[90vh]">
+
+      <h2 class="text-3xl font-bold text-gray-800">Log a New Beverage</h2>
+      <p class="text-gray-500 text-sm">Track your hydration with details.</p>
+
+      <%= form_with(model: @beverage_log, html: { class: "mt-6 space-y-4" }) do |f| %>
+        <!-- Step 1: Beverage Tracking -->
+        <%= render 'step_1', f: f%>
+        <!-- Step 2: Symptom Tracking -->
+        <%= render 'step_2', f: f%>
+
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-4xl font-semibold mb-6 text-[#ff5a5f]">Your Hydration Logs</h2>
+  <% if @beverage_logs.present? %>
+    <table class="w-full border-collapse border border-gray-300 shadow-sm rounded-lg overflow-hidden">
+      <thead>
+        <tr class="bg-gradient-to-r from-[#ff5a5f] to-red-600 text-white text-lg">
+          <th class="border border-gray-300 px-6 py-3">Date</th>
+          <th class="border border-gray-300 px-6 py-3">Time</th>
+          <th class="border border-gray-300 px-6 py-3">Category</th>
+          <th class="border border-gray-300 px-6 py-3">Quantity</th>
+          <th class="border border-gray-300 px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @beverage_logs.each do |log| %>
+          <tr class="text-center bg-gray-100 even:bg-gray-200 hover:bg-gray-300">
+            <td class="border border-gray-300 px-6 py-3"><%= log.date %></td>
+            <td class="border border-gray-300 px-6 py-3"><%= log.time.strftime("%I:%M %p") %></td>
+            <td class="border border-gray-300 px-6 py-3"><%= log.category.name %></td>
+            <td class="border border-gray-300 px-6 py-3"><%= log.quantity %> <%= log.unit %></td>
+            <td class="border border-gray-300 px-6 py-3">
+              <%= link_to "Show", beverage_log_path(log), class: "bg-[#ff5a5f] text-white px-4 py-2 rounded-md hover:bg-red-500 transition" %>
+              <%= link_to "Edit", edit_beverage_log_path(log), class: "bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600 transition" %>
+              <%= link_to "Delete", beverage_log_path(log),data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="text-center p-10 bg-gray-100 rounded-lg shadow-md">
+      <h3 class="text-2xl text-gray-600 font-semibold">No Hydration Logs Found</h3>
+      <p class="text-gray-500 mt-2">Start tracking your hydration now.</p>
+      <div class="mt-4">
+        <%= link_to "➕ Log a New Beverage", new_beverage_log_path, class: "bg-[#ff5a5f] text-white px-6 py-2 rounded-lg text-lg shadow-md hover:bg-red-500 transition" %>
+      </div>
+    </div>
+  <% end %>
+</div>

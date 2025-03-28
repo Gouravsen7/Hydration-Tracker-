@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2025-03-26
+  time: 2025-03-26 12:19:03
+  category: MyString
+  subcategory: MyString
+  quantity: 1.5
+  unit: MyString
+  temperature: 1
+  additions: MyText
+  notes: MyText
+  image: MyString
+
+two:
+  date: 2025-03-26
+  time: 2025-03-26 12:19:03
+  category: MyString
+  subcategory: MyString
+  quantity: 1.5
+  unit: MyString
+  temperature: 1
+  additions: MyText
+  notes: MyText
+  image: MyString
