@@ -1,0 +1,16 @@
+<!-- Modal Background Overlay -->
+<div id="confirmation-modal" class="hidden fixed inset-0 bg-[#4e4e4ec9] flex items-center justify-center" data-controller='update-beverage-form'>
+  <!-- Modal Box -->
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[500px] border border-gray-200">
+    <h2 class="text-lg font-semibold">Confirm Submission</h2>
+    <p class="text-sm text-gray-600 mt-2">Please review your selections before submitting:</p>
+
+    <!-- Summary content -->
+    <div id="summary-content" class="mt-4 text-sm text-gray-700"></div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+      <%= link_to "Close", '#', class: "px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400", data: { action: "click->update-beverage-form#closeModal" } %>
+      <%= link_to "Confirm", '#', class: "px-4 py-2 bg-[#ff5a5f] text-white rounded-lg hover:bg-red-500", data: { action: "click->update-beverage-form#submitForm" } %>
+    </div>
+  </div>
+</div>

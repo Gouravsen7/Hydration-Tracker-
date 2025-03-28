@@ -1,0 +1,45 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+
+    <h2 class="text-3xl font-bold text-center text-gray-800 mt-4">Welcome Back!</h2>
+    <p class="text-center text-gray-500 text-sm">Log in to track your hydration.</p>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "mt-6 space-y-4") do |f| %>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-600">Email</label>
+        <%= f.email_field :email, autofocus: true, required: true, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#ff5a5f] focus:border-[#ff5a5f] transition" %>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-600">Password</label>
+        <%= f.password_field :password, required: true, class: "mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#ff5a5f] focus:border-[#ff5a5f] transition" %>
+      </div>
+
+      <div class="flex justify-between items-center mt-2">
+        <div class="flex items-center">
+          <%= f.check_box :remember_me, class: "h-4 w-4 text-[#ff5a5f] rounded focus:ring-[#ff5a5f]" %>
+          <label class="ml-2 text-gray-600 text-sm">Remember me</label>
+        </div>
+
+        <%= link_to "Forgot password?", new_password_path(resource_name), class: "text-[#ff5a5f] text-sm hover:underline" %>
+      </div>
+
+      <div class="mt-6">
+        <%= f.submit "Login", class: "w-full bg-[#ff5a5f] hover:bg-red-500 text-white font-bold py-3 px-4 rounded-lg shadow-md transition-all" %>
+      </div>
+    <% end %>
+
+    <div class="relative mt-6">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-300"></div>
+      </div>
+      <div class="relative text-sm text-gray-500 text-center bg-white px-2 w-fit mx-auto">Or login with</div>
+    </div>
+
+    <div class="mt-4">
+      <%= link_to "Continue with Google", user_google_oauth2_omniauth_authorize_path,
+            class: "flex items-center justify-center w-full bg-white border border-gray-300 text-gray-600 font-semibold py-3 px-4 rounded-lg shadow-sm hover:bg-gray-100 transition-all" %>
+    </div>
+  </div>
+</div>
