@@ -60,7 +60,7 @@ group :test do
 end
 gem 'pg'
 gem "tailwindcss-ruby", "~> 4.0"
-gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-rails", "~> 4.4"
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
